@@ -109,27 +109,27 @@ Hold build((Hold) `hold "<HoldID id>" { <{HoldProperties ","}+ all_props> }`) {
 
     visit (all_props) {
         case (HoldProperties) `<HoldPosition hp>`: {
-            assert is_none(pos);
+            assert is_none(pos) : "Overlapping assignments for pos";
             pos = some(build(hp));
         }
         case (HoldProperties) `shape: "<String s>"`: {
-            assert is_none(shape);
+            assert is_none(shape) : "Overlapping assignments for shape";
             shape = some("<s>");
         }
         case (HoldProperties) `rotation: <Integer r>`: {
-            assert is_none(rotation);
+            assert is_none(rotation) : "Overlapping assignments for rotation";
             rotation = some(build(r));
         }
         case (HoldProperties) `colours [<{Colour ","}+ cs>]`: {
-            assert is_none(colours);
+            assert is_none(colours) : "Overlapping assignments for colours";
             colours = some([build(c) | c <- cs]);
         }
         case (HoldProperties) `start_hold: <Integer i>`: {
-            assert is_none(ht);
+            assert is_none(ht) : "Overlapping assignments for star_hold/end_hold";
             ht = some(startHold(build(i)));
         }
         case (HoldProperties) `end_hold`: {
-            assert is_none(ht);
+            assert is_none(ht) : "Overlapping assignments for star_hold/end_hold";;
             ht = some(endHold());
         }
     }
