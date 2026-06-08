@@ -33,7 +33,7 @@ bouldering_wall "Example wall" {
             ],
             side_holds [
                 hold "0004" {
-                    pos: { x: 30, y: 20 },
+                    pos: { angle: 30 },
                     shape: "42",
                     colours [ white, orange, green ]
                 }
