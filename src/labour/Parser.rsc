@@ -10,6 +10,6 @@ import labour::Syntax;
  * that represents the parsed program.
  */
 
- start[BoulderingWall] parseLaBouR(loc filePath) {
+start[BoulderingWall] parseLaBouR(loc filePath) {
     return parse(#start[BoulderingWall], readFile(filePath));
 }

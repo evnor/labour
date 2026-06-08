@@ -20,12 +20,14 @@ module labour::Syntax
     "}"// Add definition
  ;
 
+layout Whitespace = [\ \t\n\r]*;
+
 /*
     lexical
 */
 lexical Name = [a-zA-Z0-9\ _\-]+;
 
-lexical String = [0-9A-Z];
+lexical String = [0-9a-zA-Z]*;
 
 lexical Integer = "-"? [0-9]+;
 
@@ -58,8 +60,8 @@ syntax Volume
 ;
 
 syntax HoldPosition
- = hold_Position: "pos" ":" "Point"
- | hold_Position: "pos" ":" "AnglePoint"
+ = hold_Position: "pos" ":" Point
+ | hold_Position: "pos" ":" AnglePoint
 ;
 
 syntax VolumePosition
@@ -118,13 +120,13 @@ syntax HoldProperties
 
 syntax FrontHolds
  = front_holds: "front_holds" "[" 
-    {Hold ","}+
+    {Hold ","}*
  "]"
 ;
 
 syntax SideHolds
  = side_holds: "side_holds" "[" 
-    {Hold ","}+
+    {Hold ","}*
  "]"
 ;
 
@@ -191,7 +193,7 @@ syntax Grade
  = grade: "grade" ":" "\"" String "\"" ;
 
 syntax Point
- = point: "{" "x" ":" "Integer" "," "y" ":" "Integer" "}";
+ = point: "{" "x" ":" Integer "," "y" ":" Integer "}";
 
 syntax AnglePoint
  = angle_point: "{" "angle" ":" Integer "}" ;
