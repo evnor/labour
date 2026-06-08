@@ -19,8 +19,12 @@ data Volume
  = circle(Point pos, int depth, int radius, list[Hold] frontHolds, list[Hold] sideHolds)
  | triangle(Point pos, Point extrusion, int depth, list[Point] corners, list[Hold] leftHolds, list[Hold] rightHolds, list[Hold] bottomHolds);
 
+data Option[&T] 
+    = none()
+    | some(&T v);
+
 data Hold
- = hold(str name, Position pos, str shape, int rotation, list[Colour] colours, HoldType holdType);
+ = hold(str name, Position pos, str shape, Option[int] rotation, list[Colour] colours, HoldType holdType);
 
 data Position
  = frontPos(Point pos)
