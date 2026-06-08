@@ -1,4 +1,4 @@
-bouldering_wall "Small" {
+bouldering_wall "Invalid rotation" {
     routes [
         bouldering_route "Route" {
             grade: "4C",
@@ -17,7 +17,7 @@ bouldering_wall "Small" {
                     shape: "5",
                     rotation: 98,
                     colours [ white ],
-                    start_hold: 1
+                    start_hold: 3
                 }               
             ],
             side_holds [
