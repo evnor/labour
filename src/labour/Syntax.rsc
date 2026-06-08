@@ -17,7 +17,7 @@ module labour::Syntax
  = wall: "bouldering_wall" "\"" Name "\"" "{"
     Routes ","
     Volumes
-    "}"// Add definition
+    "}"
  ;
 
 layout Whitespace = [\ \t\n\r]*;
@@ -80,15 +80,15 @@ syntax Rotation
  = rotation: "rotation" ":" Integer ;
 
 syntax Colour
-= white: "white"
- | yellow: "yellow"
- | green: "green"
- | blue: "blue"
- | red: "red"
- | purple: "purple"
- | pink: "pink"
- | black: "black"
- | orange: "orange"
+= "white"
+| "yellow"
+| "green"
+| "blue"
+| "red"
+| "purple"
+| "pink"
+| "black"
+| "orange"
 ;
 
 syntax Colours
@@ -179,7 +179,7 @@ syntax Triangle
  Extrusion ","
  Depth ","
  Corners ","
- TriangleHolds
+ {TriangleHolds ","}*
  "}"
 ;
 
