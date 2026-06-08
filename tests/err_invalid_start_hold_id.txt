@@ -1,4 +1,4 @@
-bouldering_wall "Invalid rotation" {
+bouldering_wall "Invalid start hold ID" {
     routes [
         bouldering_route "Route" {
             grade: "4C",
