@@ -30,9 +30,10 @@ data Point
  = point(int x, int y);
 
 data HoldType
- = normal();
-//  | startHold(int num)
-//  | endHold();
+ = normal()
+ | endHold()
+ | startHold(int hand)
+;
 
 data Colour
   = white()
