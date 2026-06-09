@@ -22,7 +22,7 @@ bool checkWellformedness(loc fil) {
   // Transform the parse tree into an abstract syntax tree
   try &T ast = cst2ast(resource);
   catch AssertionFailed(msg): {
-    println(msg);
+    // println(msg);
     return false;
   }
   // Check the well-formedness of the program

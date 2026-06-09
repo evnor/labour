@@ -1,0 +1,33 @@
+bouldering_wall "Small" {
+    routes [
+        bouldering_route "Route" {
+            grade: "4C",
+            grid_base_point { x: 0, y: 0 },
+            holds ["0001"]
+        }
+    ],
+    volumes [
+        circle {
+            pos: { x: 50, y: 200 },
+            depth: -10,
+            radius: 50,
+            front_holds [
+                hold "0001" {
+                    pos: { x: 2, y: 20 },
+                    shape: "5",
+                    rotation: 98,
+                    colours [ white ],
+                    start_hold: 1
+                }               
+            ],
+            side_holds [
+                hold "0002" {
+                    pos: { angle: 359 },
+                    shape: "5",
+                    colours [ white ],
+                    end_hold
+                }
+            ]
+        }
+    ]
+}

@@ -24,6 +24,7 @@ import String;
  */
 
 bool checkBoulderWallConfiguration(BoulderingWall wall){
+  bool existAndUnique = checkHoldIDsExistAndUnique(wall);
   bool numberOfHolds = checkNumberOfHolds(wall);
   bool startingLabelLimit = checkStartingHoldsTotalLimit(wall);
   bool unique_end_hold = checkUniqueEndHold(wall);
@@ -37,7 +38,7 @@ bool checkBoulderWallConfiguration(BoulderingWall wall){
   bool split = checkAtMostOneSplit(wall);
   bool sideHoldsAngle = checkCircleSideHoldsUseAngle(wall);
 
-  return (numberOfHolds && startingLabelLimit && unique_end_hold && requiredProperties && angles && rotations && triangleCorners && merge && colours && num_route_volume && sideHoldsAngle && split);
+  return (existAndUnique && numberOfHolds && startingLabelLimit && unique_end_hold && requiredProperties && angles && rotations && triangleCorners && merge && colours && num_route_volume && sideHoldsAngle && split);
 }
 
 
@@ -58,6 +59,39 @@ bool checkNumberOfHolds(BoulderingWall wall) {
     }
   }
   return false;
+}
+
+// Check that each hold ID actually exists and are unique
+// Not required by the spec, but otherwise other tests don't detect some errors
+bool checkHoldIDsExistAndUnique(BoulderingWall wall) {
+  switch (wall) {
+    case boulderingWall(str name, list[BoulderingRoute] routes, list[Volume] volumes): {
+      for (route <- routes) {
+        switch (route) {
+          case boulderingRoute(str name, str grade, Point GridBasePoint, list[RouteHoldID] holds): {
+            for (rhID <- holds) {
+              list[str] names = getNamesFromRouteHoldID(rhID);
+              for (str name <- names) {
+                if (numHoldsWithName(wall, name) != 1) {
+                  return false;
+                }
+              }
+            }
+          }
+        }
+      }
+      return true;
+    }
+  }
+  return false;
+}
+
+int numHoldsWithName(BoulderingWall wall, str name) {
+  int count = 0;
+  visit (wall) {
+    case hold(other_name,_,_,_,_,_): if (name == other_name) count += 1;
+  }
+  return count;
 }
 
 // Check that routes have between zero and two hand start holds
