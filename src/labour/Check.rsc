@@ -35,10 +35,9 @@ bool checkBoulderWallConfiguration(BoulderingWall wall){
   bool merge = checkNoSplitAfterMerge(wall);
   bool colours = checkRouteHoldColours(wall);
   bool num_route_volume = checkWallHasRouteAndVolumes(wall);
-  bool split = checkAtMostOneSplit(wall);
   bool sideHoldsAngle = checkCircleSideHoldsUseAngle(wall);
 
-  return (existAndUnique && numberOfHolds && startingLabelLimit && unique_end_hold && requiredProperties && angles && rotations && triangleCorners && merge && colours && num_route_volume && sideHoldsAngle && split);
+  return (existAndUnique && numberOfHolds && startingLabelLimit && unique_end_hold && requiredProperties && angles && rotations && triangleCorners && merge && colours && num_route_volume && sideHoldsAngle);
 }
 
 
@@ -380,23 +379,6 @@ bool checkWallHasRouteAndVolumes(BoulderingWall wall){
   switch (wall) {
     case boulderingWall(str name, list[BoulderingRoute] routes, list[Volume] volumes): {
       return size(routes) >= 1 && size(volumes) >= 1;
-    }
-  }
-
-  return false;
-}
-
-// Every route must have at most one splitting hold where sub-routes start i.e. no more than two sub-routes
-bool checkAtMostOneSplit(BoulderingWall wall) {
-  switch (wall) {
-    case boulderingWall(_, list[BoulderingRoute] routes, _): {
-      for (route <- routes) {
-        if (!checkRouteNoSplitAfterMerge(route)) {
-          return false;
-        }
-      }
-
-      return true;
     }
   }
 
