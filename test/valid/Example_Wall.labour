@@ -4,6 +4,16 @@ bouldering_wall "Example wall" {
             grade: "5A",
             grid_base_point { x: 0, y: 0 },
             holds ["0001", "0002", {"0003", "0004"}, {"0005", "0006"}, "0007"]
+        },
+        bouldering_route "A second one" {
+            grade: "5A",
+            grid_base_point { x: 0, y: 0 },
+            holds ["0001", "0002", {"0003", "0004"}]
+        },
+        bouldering_route "And a third" {
+            grade: "5A",
+            grid_base_point { x: 0, y: 0 },
+            holds ["0001", "0002", {"0003", "0004"}, {"0005", "0006"}]
         }
     ],
     volumes [
@@ -67,6 +77,38 @@ bouldering_wall "Example wall" {
                     rotation: 0,
                     colours [ white, red ],
                     end_hold
+                }
+            ]
+        },
+        circle {
+            pos: { x: 50, y: 200 },
+            depth: -10,
+            radius: 50,
+            front_holds [
+                hold "0008" {
+                    pos: { x: 2, y: 20 },
+                    shape: "5",
+                    rotation: 98,
+                    colours [ white ],
+                    start_hold: 1
+                },
+                hold "0009" {
+                    pos: { x: 2, y: 20 },
+                    shape: "5",
+                    rotation: 98,
+                    colours [ white ]
+                },
+                hold "0010" {
+                    pos: { x: 15, y: 30 },
+                    shape: "52",
+                    colours [ blue, white ]
+                }
+            ],
+            side_holds [
+                hold "0011" {
+                    pos: { angle: 30 },
+                    shape: "42",
+                    colours [ white, orange, green ]
                 }
             ]
         }

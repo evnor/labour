@@ -1,9 +1,9 @@
-bouldering_wall "Invalid colours" {
+bouldering_wall "Small" {
     routes [
         bouldering_route "Route" {
             grade: "4C",
             grid_base_point { x: 0, y: 0 },
-            holds ["0001", "0002", "0003"]
+            holds ["0001", "0001"]
         }
     ],
     volumes [
@@ -15,23 +15,16 @@ bouldering_wall "Invalid colours" {
                 hold "0001" {
                     pos: { x: 2, y: 20 },
                     shape: "5",
-                    rotation: 404,
-                    colours [ white, red ],
-                    start_hold: 1
-                },
-                hold "0003" {
-                    pos: { x: 2, y: 20 },
-                    shape: "5",
-                    rotation: 404,
+                    rotation: 98,
                     colours [ white ],
                     start_hold: 1
-                }           
+                }               
             ],
             side_holds [
-                hold "0002" {
+                hold "0001" {
                     pos: { angle: 359 },
                     shape: "5",
-                    colours [ red, green ],
+                    colours [ white ],
                     end_hold
                 }
             ]
