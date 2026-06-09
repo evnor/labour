@@ -1,4 +1,4 @@
-bouldering_wall "Side hold isnt an Angle hold" {
+bouldering_wall "Small" {
     routes [
         bouldering_route "Route" {
             grade: "4C",
@@ -7,27 +7,32 @@ bouldering_wall "Side hold isnt an Angle hold" {
         }
     ],
     volumes [
-        circle {
-            pos: { x: 50, y: 200 },
-            depth: -10,
-            radius: 50,
-            front_holds [
+        triangle {
+            pos: { x: 0, y: 0 },
+            extrusion: { x: 10, y: 2 },
+            depth: 40,
+            corners [
+                { x: 20, y: 0 },
+                { x: -20, y: 0 },
+                { x: 0, y: 30 }
+            ],
+            left_holds [
                 hold "0001" {
                     pos: { x: 2, y: 20 },
                     shape: "5",
                     rotation: 98,
                     colours [ white ],
                     start_hold: 1
-                },
+                }
+            ],
+            left_holds [
                 hold "0002" {
-                    pos: { x: 2, y: 20 },
+                    pos: { angle: 359 },
                     shape: "5",
-                    rotation: 98,
                     colours [ white ],
                     end_hold
                 }
-            ],
-            side_holds []
+            ]
         }
     ]
 }
