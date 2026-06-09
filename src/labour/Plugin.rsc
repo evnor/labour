@@ -20,7 +20,11 @@ bool checkWellformedness(loc fil) {
   // Parsing
   &T resource = parseLaBouR(fil);
   // Transform the parse tree into an abstract syntax tree
-  &T ast = cst2ast(resource);
+  try &T ast = cst2ast(resource);
+  catch AssertionFailed(msg): {
+    println(msg);
+    return false;
+  }
   // Check the well-formedness of the program
   return checkBoulderWallConfiguration(ast);
 }
