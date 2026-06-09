@@ -104,6 +104,10 @@ syntax StartHold
 syntax EndHold
   = end_hold: "end_hold"; 
 
+// We use this HoldProperties construction so that optional properties need not be specified,
+// and to allow reordering. We could eliminate this (and the later TriangeHolds) by enumerating
+// all options, but this way we could provide feedback on why a file is invalid in the cst2ast
+// function.
 syntax Hold
   = hold: "hold" "\"" HoldID "\"" "{"
   {HoldProperties ","}+
@@ -174,6 +178,7 @@ syntax TriangleHolds
   | bottom: BottomHolds
 ;
 
+// We use the 'TriangleHolds' construction so that not every *_holds needs to be specified
 syntax Triangle
   = triangle: "triangle" "{" 
   VolumePosition ","

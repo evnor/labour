@@ -16,7 +16,9 @@ import labour::Syntax;
  * Map regular CST arguments (e.g., *, +, ?) to lists
  * Map lexical nodes to Rascal primitive types (bool, int, str)
  */
-
+// Because some valid ParseTrees cannot be represented by an AST,
+// we sometimes raise an AssertionFailed error. Therefore we 
+// modify checkWellformedness.
 labour::AST::BoulderingWall cst2ast(start[BoulderingWall] wall) {
   return build(wall.top);
 }
@@ -50,10 +52,12 @@ Volume build((Volume) `circle { <VolumePosition vp>, <Depth depth>, radius: <Int
 }
 
 Volume build((Volume) `triangle { <VolumePosition vp>, extrusion: <Point ext>, <Depth depth>, corners [<{Point ","}+ corners>], <{TriangleHolds ","}* holds> }`) {
+  // Handle the TriangeHolds section
   tuple[list[Hold], list[Hold], list[Hold]] hs = build(holds);
   return triangle(build(vp), build(ext), build(depth), [build(p) | p <- corners ], hs<0>, hs<1>, hs<2>);
 }
 
+// returns <left_holds, right_holds, bottom_holds>
 tuple[list[Hold], list[Hold], list[Hold]] build({TriangleHolds ","}* t_holds) {
   map[str, list[Hold]] holds = ();
   visit (t_holds) {
@@ -100,6 +104,8 @@ bool is_some(Option[&T] val) {
   return default_;
 }
 
+// Handle HoldProperties. Each property may be specified only once, and some 
+// may be specified zero times.
 Hold build((Hold) `hold "<HoldID id>" { <{HoldProperties ","}+ all_props> }`) {
   Option[Position] pos = none();
   Option[str] shape = none();
@@ -133,10 +139,11 @@ Hold build((Hold) `hold "<HoldID id>" { <{HoldProperties ","}+ all_props> }`) {
       ht = some(endHold());
     }
   }
+  // Required properties
   assert is_some(pos) : "Each hold must define a position";
   assert is_some(shape) : "Each hold must define a shape";
   assert is_some(colours) : "Each hold must define (a) colour(s)";
-  return hold("<id>", unwrap_or(pos, point(0,0)), unwrap_or(shape, "ERR"), rotation, unwrap_or(colours, []), unwrap_or(ht, normal()));
+  return hold("<id>", unwrap_or(pos, point(9999,9999)), unwrap_or(shape, "ERR"), rotation, unwrap_or(colours, []), unwrap_or(ht, normal()));
 }
 
 Colour build(labour::Syntax::Colour c) {

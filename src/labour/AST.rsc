@@ -15,6 +15,8 @@ data RouteHoldID
   = single_holdID(str id)
   | split_holdID(str leftId, str rightId);
 
+// Even if writing *_holds may be optional, leaving it unspecified is equivalent to an empty list
+// No need to make them all Option[list[Hold]]
 data Volume
   = circle(Point pos, int depth, int radius, list[Hold] frontHolds, list[Hold] sideHolds)
   | triangle(Point pos, Point extrusion, int depth, list[Point] corners, list[Hold] leftHolds, list[Hold] rightHolds, list[Hold] bottomHolds);
@@ -23,6 +25,7 @@ data Option[&T]
   = none()
   | some(&T v);
 
+// rotation is optional, so it is specified as an Option[int]
 data Hold
   = hold(str name, Position pos, str shape, Option[int] rotation, list[Colour] colours, HoldType holdType);
 
@@ -33,6 +36,8 @@ data Position
 data Point
   = point(int x, int y);
 
+// Instead of adding a normal() variant, we could have used Option[HoldType] where HoldType is endHold or startHold.
+// This way seemed simpler.
 data HoldType
   = normal()
   | endHold()
