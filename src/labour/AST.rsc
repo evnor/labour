@@ -16,28 +16,27 @@ data RouteHoldID
   | split_holdID(str leftId, str rightId);
 
 data Volume
- = circle(Point pos, int depth, int radius, list[Hold] frontHolds, list[Hold] sideHolds)
- | triangle(Point pos, Point extrusion, int depth, list[Point] corners, list[Hold] leftHolds, list[Hold] rightHolds, list[Hold] bottomHolds);
+  = circle(Point pos, int depth, int radius, list[Hold] frontHolds, list[Hold] sideHolds)
+  | triangle(Point pos, Point extrusion, int depth, list[Point] corners, list[Hold] leftHolds, list[Hold] rightHolds, list[Hold] bottomHolds);
 
 data Option[&T] 
-    = none()
-    | some(&T v);
+  = none()
+  | some(&T v);
 
 data Hold
- = hold(str name, Position pos, str shape, Option[int] rotation, list[Colour] colours, HoldType holdType);
+  = hold(str name, Position pos, str shape, Option[int] rotation, list[Colour] colours, HoldType holdType);
 
 data Position
- = frontPos(Point pos)
- | sidePos(int angle);
+  = frontPos(Point pos)
+  | sidePos(int angle);
 
 data Point
- = point(int x, int y);
+  = point(int x, int y);
 
 data HoldType
- = normal()
- | endHold()
- | startHold(int hand)
-;
+  = normal()
+  | endHold()
+  | startHold(int hand);
 
 data Colour
   = white()

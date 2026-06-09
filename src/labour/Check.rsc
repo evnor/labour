@@ -49,7 +49,7 @@ bool checkNumberOfHolds(BoulderingWall wall) {
         switch (route) {
           case boulderingRoute(str name, str grade, Point GridBasePoint, list[RouteHoldID] holds): {
             if (size(holds) < 2) {
-            return false;
+              return false;
             }
           }
         }

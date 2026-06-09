@@ -11,19 +11,19 @@ module labour::Syntax
  */
 
  /*
-    Start
+   Start
  */
  start syntax BoulderingWall
  = wall: "bouldering_wall" "\"" Name "\"" "{"
-    Routes ","
-    Volumes
-    "}"
+   Routes ","
+   Volumes
+   "}"
  ;
 
 layout Whitespace = [\ \t\n\r]*;
 
 /*
-    lexical
+   lexical
 */
 lexical Name = [a-zA-Z0-9\ _\-]+;
 
@@ -35,15 +35,16 @@ lexical HoldID = [0-9][0-9][0-9][0-9];
 
 
 /*
-    Routes
+   Routes
 */
 syntax Routes
- = routes: "routes" "["
+  = routes: "routes" "["
     {BoulderingRoute ","}+
     "]"
 ;
+
 syntax BoulderingRoute
- = boulderingRoute: "bouldering_route" "\"" Name "\"" "{"
+  = boulderingRoute: "bouldering_route" "\"" Name "\"" "{"
     Grade ","
     GridBasePoint ","
     Holds
@@ -51,162 +52,162 @@ syntax BoulderingRoute
 ;
 
 /*
-    Volumes
+   Volumes
 */
 
 syntax Volume 
- = Circle: Circle
- | Triangle: Triangle
+  = Circle: Circle
+  | Triangle: Triangle
 ;
 
 syntax HoldPosition
- = hold_Position: "pos" ":" Point
- | hold_Position: "pos" ":" AnglePoint
+  = hold_Position: "pos" ":" Point
+  | hold_Position: "pos" ":" AnglePoint
 ;
 
 syntax VolumePosition
- = volume_position: "pos" ":" Point;
+  = volume_position: "pos" ":" Point;
 
 syntax Depth
- = depth: "depth" ":" Integer ;
+  = depth: "depth" ":" Integer ;
 
 syntax Radius
- = radius: "radius" ":" Integer ;
+  = radius: "radius" ":" Integer ;
 
 syntax Shape
- = shape: "shape" ":" "\"" String "\"" ;
+  = shape: "shape" ":" "\"" String "\"" ;
 
 syntax Rotation
- = rotation: "rotation" ":" Integer ;
+  = rotation: "rotation" ":" Integer ;
 
 syntax Colour
-= "white"
-| "yellow"
-| "green"
-| "blue"
-| "red"
-| "purple"
-| "pink"
-| "black"
-| "orange"
+  = "white"
+  | "yellow"
+  | "green"
+  | "blue"
+  | "red"
+  | "purple"
+  | "pink"
+  | "black"
+  | "orange"
 ;
 
 syntax Colours
- = colours: "colours" "["
+  = colours: "colours" "["
     {Colour ","}+
- "]"
+  "]"
 ;
 
 syntax StartHold
- = start_hold: "start_hold" ":" Integer ; 
+  = start_hold: "start_hold" ":" Integer ; 
 
 syntax EndHold
- = end_hold: "end_hold"; 
+  = end_hold: "end_hold"; 
 
 syntax Hold
- = hold: "hold" "\"" HoldID "\"" "{"
- {HoldProperties ","}+
- "}"
+  = hold: "hold" "\"" HoldID "\"" "{"
+  {HoldProperties ","}+
+  "}"
 ;
 
 syntax HoldProperties
- = pos: HoldPosition
- | shape: Shape 
- | rotation: Rotation 
- | colours: Colours 
- | start_hold: StartHold 
- | end_hold: EndHold
+  = pos: HoldPosition
+  | shape: Shape 
+  | rotation: Rotation 
+  | colours: Colours 
+  | start_hold: StartHold 
+  | end_hold: EndHold
 ;
 
 syntax FrontHolds
- = front_holds: "front_holds" "[" 
-    {Hold ","}*
- "]"
+  = front_holds: "front_holds" "[" 
+  {Hold ","}*
+  "]"
 ;
 
 syntax SideHolds
- = side_holds: "side_holds" "[" 
-    {Hold ","}*
- "]"
+  = side_holds: "side_holds" "[" 
+  {Hold ","}*
+  "]"
 ;
 
 syntax Circle
- = circle: "circle" "{" 
- VolumePosition ","
- Depth ","
- Radius ","
- FrontHolds ","
- SideHolds
- "}"
+  = circle: "circle" "{" 
+  VolumePosition ","
+  Depth ","
+  Radius ","
+  FrontHolds ","
+  SideHolds
+  "}"
 ;
 
 syntax Extrusion
- = extrusion: "extrusion" ":" Point ;
+  = extrusion: "extrusion" ":" Point ;
 
 syntax Corners
- = corners: "corners" "["
- {Point ","}+
- "]"
+  = corners: "corners" "["
+  {Point ","}+
+  "]"
 ;
 
 syntax LeftHolds
- = left_holds: "left_holds" "["
- {Hold ","}*
- "]"
+  = left_holds: "left_holds" "["
+  {Hold ","}*
+  "]"
 ;
 
 syntax RightHolds
- = right_holds: "right_holds" "["
- {Hold ","}*
- "]"
+  = right_holds: "right_holds" "["
+  {Hold ","}*
+  "]"
 ;
 
 syntax BottomHolds
- = bottom_holds: "bottom_holds" "["
- {Hold ","}*
- "]"
+  = bottom_holds: "bottom_holds" "["
+  {Hold ","}*
+  "]"
 ;
 
 syntax TriangleHolds
- = left: LeftHolds
- | right: RightHolds
- | bottom: BottomHolds
+  = left: LeftHolds
+  | right: RightHolds
+  | bottom: BottomHolds
 ;
 
 syntax Triangle
- = triangle: "triangle" "{" 
- VolumePosition ","
- Extrusion ","
- Depth ","
- Corners ","
- {TriangleHolds ","}*
- "}"
+  = triangle: "triangle" "{" 
+  VolumePosition ","
+  Extrusion ","
+  Depth ","
+  Corners ","
+  {TriangleHolds ","}*
+  "}"
 ;
 
 syntax Volumes 
- = volumes: "volumes" "[" 
-        {Volume "," }+
-    "]"
+  = volumes: "volumes" "[" 
+    {Volume "," }+
+  "]"
 ;
 
 syntax Grade
- = grade: "grade" ":" "\"" String "\"" ;
+  = grade: "grade" ":" "\"" String "\"" ;
 
 syntax Point
- = point: "{" "x" ":" Integer "," "y" ":" Integer "}";
+  = point: "{" "x" ":" Integer "," "y" ":" Integer "}";
 
 syntax AnglePoint
- = angle_point: "{" "angle" ":" Integer "}" ;
+  = angle_point: "{" "angle" ":" Integer "}" ;
 
 syntax GridBasePoint
- = grid_base_point: "grid_base_point" Point;
+  = grid_base_point: "grid_base_point" Point;
 
 syntax RouteHoldID
- = single_holdID: "\"" HoldID "\""
- | split_holdID: "{" "\"" HoldID "\"" "," "\"" HoldID "\"""}";
+  = single_holdID: "\"" HoldID "\""
+  | split_holdID: "{" "\"" HoldID "\"" "," "\"" HoldID "\"""}";
 
 syntax Holds
- = holds: "holds" "[" 
-    {RouteHoldID ","}+
-    "]" 
+  = holds: "holds" "[" 
+  {RouteHoldID ","}+
+  "]" 
 ;

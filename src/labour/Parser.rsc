@@ -11,5 +11,5 @@ import labour::Syntax;
  */
 
 start[BoulderingWall] parseLaBouR(loc filePath) {
-    return parse(#start[BoulderingWall], readFile(filePath));
+  return parse(#start[BoulderingWall], readFile(filePath));
 }
